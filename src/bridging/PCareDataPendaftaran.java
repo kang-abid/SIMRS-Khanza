@@ -162,11 +162,23 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         if(koneksiDB.cariCepat().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
-                public void insertUpdate(DocumentEvent e) {tampil();}
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
                 @Override
-                public void removeUpdate(DocumentEvent e) {tampil();}
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
                 @Override
-                public void changedUpdate(DocumentEvent e) {tampil();}
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
             });
         }  
         
@@ -3186,7 +3198,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                                     "\"kdDiag3\": "+diagnosa3+"," +
                                     "\"kdPoliRujukInternal\": null," +
                                     "\"rujukLanjut\": null," +
-                                    "\"kdTacc\": null," +
+                                    "\"kdTacc\": 0," +
                                     "\"alasanTacc\": null" +
                                   "}";
                     System.out.println(requestJson);
