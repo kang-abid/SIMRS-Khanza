@@ -17,7 +17,8 @@ import fungsi.BackgroundMusic;
 import fungsi.WarnaTable;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.var;
+import fungsi.akses;
+import fungsi.koneksiDB;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -54,7 +55,6 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private int i=0,nilai_detik,rujukanbaru=0;
     private String pilihan="",alarm="",URL="",link="",norm="",statusreg="",statuspasien="",norujuk="",nol_detik,detik;
-    private final Properties prop = new Properties();
     private SisruteApi api=new SisruteApi();
     private BackgroundMusic music;
     private DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
@@ -209,10 +209,9 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
         });
         
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml")); 
-            link=prop.getProperty("URLAPISISRUTE");
-            alarm=prop.getProperty("ALARMRSISRUTE");
-            idrs=prop.getProperty("IDSISRUTE");
+            link=koneksiDB.URLAPISISRUTE();
+            alarm=koneksiDB.ALARMRSISRUTE();
+            idrs=koneksiDB.IDSISRUTE();
         } catch (Exception e) {
             alarm="no";
             System.out.println("E : "+e);
@@ -222,7 +221,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             jam();
         }
         
-        var.setAktif(false);
+        akses.setAktif(false);
     }    
 
     /** This method is called from within the constructor to
@@ -272,7 +271,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
         WindowAmbilSampel.setUndecorated(true);
         WindowAmbilSampel.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Balas Rujukan Masuk Sisrute ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Balas Rujukan Masuk Sisrute ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(null);
 
@@ -378,7 +377,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Rujukan Masuk Sisrute ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Rujukan Masuk Sisrute ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -585,7 +584,7 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));            
-    var.setAktif(false);
+    akses.setAktif(false);
     tampil();
     this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnCariActionPerformed
@@ -601,11 +600,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnRegistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistActionPerformed
-        var.setAktif(true);
+        akses.setAktif(true);
         if(!No.equals("")){
             if(SttsRegistrasi.trim().equals("Sudah Teregistrasi")){
                 JOptionPane.showMessageDialog(null,"Pasien sudah teregistrasi...!!");
-                var.setAktif(false);
+                akses.setAktif(false);
             }else{
                 try{
                     pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih cara registrasi..!!","Pilihan Registrasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Via Registrasi","Via IGD","Via Cek No.Kartu VClaim","Via Cek NIK VClaim","Via Cek Rujukan Kartu PCare di VClaim","Via Cek Rujukan Kartu RS di VClaim"},"Via Registrasi");
@@ -717,16 +716,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             } 
                             break;
                         default:
-                            var.setAktif(false);
+                            akses.setAktif(false);
                             break;
                     }
                 }catch(Exception e){
-                    var.setAktif(false);
+                    akses.setAktif(false);
                 }
             }
         }else{            
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data rujukan...!!!!");
-            var.setAktif(false);
+            akses.setAktif(false);
             TCari.requestFocus();
         }   
     }//GEN-LAST:event_BtnRegistActionPerformed
@@ -756,7 +755,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             
-            Sequel.queryu("delete from temporary");
+            Sequel.queryu("truncate table temporary");
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){  
                 Sequel.menyimpan("temporary","'0','"+
@@ -798,15 +797,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }
             
             Map<String, Object> param = new HashMap<>();                 
-            param.put("namars",var.getnamars());
-            param.put("alamatrs",var.getalamatrs());
-            param.put("kotars",var.getkabupatenrs());
-            param.put("propinsirs",var.getpropinsirs());
-            param.put("kontakrs",var.getkontakrs());
-            param.put("emailrs",var.getemailrs());   
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());   
             param.put("logo",Sequel.cariGambar("select logo from setting")); 
-            Valid.MyReport("rptCariSisruteRujukanMasuk.jrxml","report","[ Pencarian Rujukan Masuk Sisrute ]",
-                "select * from temporary order by no asc",param);
+            Valid.MyReport("rptCariSisruteRujukanMasuk.jasper","report","[ Pencarian Rujukan Masuk Sisrute ]",param);
             this.setCursor(Cursor.getDefaultCursor());
         } 
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -814,7 +812,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         cmbStatus.setSelectedIndex(0);
-        var.setAktif(false);
+        akses.setAktif(false);
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -828,7 +826,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnJawabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJawabActionPerformed
-        var.setAktif(true);
+        akses.setAktif(true);
         if(!No.equals("")){
             if(NoRujuk.trim().equals("")){
                 Valid.textKosong(TCari,"No.Rujukan");
@@ -840,7 +838,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }else{  
-            var.setAktif(false);
+            akses.setAktif(false);
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data rujukan...!!!!");
             TCari.requestFocus();
         }  
@@ -871,7 +869,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void BtnCloseIn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseIn4ActionPerformed
-        var.setAktif(false);
+        akses.setAktif(false);
         WindowAmbilSampel.dispose();
     }//GEN-LAST:event_BtnCloseIn4ActionPerformed
 
@@ -1085,7 +1083,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
                 detik = nol_detik + Integer.toString(nilai_detik);
                 if(detik.equals("05")){
-                    if(var.getAktif()==false){
+                    if(akses.getAktif()==false){
                         rujukanbaru=0;
                         tampil();
                         for(i=0;i<tbBangsal.getRowCount();i++){
@@ -1111,10 +1109,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
     
     public void isCek(){
-        if(var.getjml2()>=1){            
-            Sequel.cariIsi("select no_ktp from pegawai where nik=?",Nama,var.getkode());
+        if(akses.getjml2()>=1){            
+            Sequel.cariIsi("select no_ktp from pegawai where nik=?",Nama,akses.getkode());
             BtnPegawai.setEnabled(false);
-            Sequel.cariIsi("select nama from pegawai where nik=?",Nama,var.getkode());
+            Sequel.cariIsi("select nama from pegawai where nik=?",Nama,akses.getkode());
         }else{
             BtnPegawai.setEnabled(true);
         }    

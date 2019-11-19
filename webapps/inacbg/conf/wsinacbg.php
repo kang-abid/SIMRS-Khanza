@@ -2,17 +2,17 @@
     require_once('../conf/conf.php');
 
     function getKey() {
-       $keyRS = "f4342bbd3bda96e3c500a5c6a7701011f45888e12794ebb09ee92dae83454b28";   
+       $keyRS = "75629ef0ed1eca5969ec10bcd8a1ab18d05549c15b3d34e892f7b89ac3cb598a";   
        return $keyRS;
     }
 
     function getUrlWS() {
-        $UrlWS = "http://inacbg.rs.uns.ac.id/E-Klaim/ws.php";
+        $UrlWS = "http://192.168.111.11/E-Klaim/ws.php";
         return $UrlWS;
     }
     
     function getKelasRS() {
-        $kelasRS = "CP";
+        $kelasRS = "CS";
         return $kelasRS;
     }
 
@@ -237,7 +237,7 @@
                                 "laboratorium": "'.$laboratorium.'",
                                 "pelayanan_darah": "0",
                                 "rehabilitasi": "0",
-                                "kamar": "'.$kamar.'",
+                                "kamar": "'.($kamar+$tarif_poli_eks).'",
                                 "rawat_intensif": "0",
                                 "obat": "'.$obat.'",
                                 "obat_kronis": "'.$obat_kronis.'",
@@ -246,7 +246,7 @@
                                 "bmhp": "'.$bmhp.'",
                                 "sewa_alat": "'.$sewa_alat.'"
                              },
-                            "tarif_poli_eks": "'.$tarif_poli_eks.'",
+                            "tarif_poli_eks": "0",
                             "nama_dokter": "'.$nama_dokter.'",
                             "kode_tarif": "'.$kode_tarif.'",
                             "payor_id": "'.$payor_id.'",
