@@ -18,8 +18,9 @@
         ?>
     <div style="width: 100%; height: 90%; overflow: auto;">
     <?php
-        $BtnCari  =isset($_POST['BtnCari'])?$_POST['BtnCari']:NULL;
-        $keyword  =isset($_POST['keyword'])?trim($_POST['keyword']):NULL;
+        $BtnCari  = isset($_POST['BtnCari'])?$_POST['BtnCari']:NULL;
+        $keyword  = isset($_POST['keyword'])?trim($_POST['keyword']):NULL;
+        $keyword  = validTeks($keyword);
         if (isset($BtnCari)) {      
                 $tahunawal      =trim($_POST['tahunawal']);
                 $bulanawal      =trim($_POST['bulanawal']);
@@ -76,7 +77,7 @@
                     while($baris = mysqli_fetch_array($hasil)) {
                         $status="<a href='?act=KlaimBaruManual&action=Kirim&no_sep=".$baris["no_sep"]."&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik'>[Kirim]</a>";
                         if(getOne("select count(no_sep) from inacbg_klaim_baru where no_sep='".$baris["no_sep"]."'")>0){
-                            $status="Terkirim INACBG<br><a href='?act=KlaimBaruManual&action=Kirim&no_sep=".$baris["no_sep"]."&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik'>[Kirim Ulang]</a>";
+                            $status="<a href='?act=KlaimBaruManual&action=Kirim&no_sep=".$baris["no_sep"]."&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik'>[Kirim Ulang]</a>";
                         }
                         echo "<tr class='isi' title='".$baris["no_rawat"].", ".$baris["no_sep"].", ".$baris["tglsep"].", ".$baris["no_kartu"].", ".$baris["nomr"].", ".$baris["nama_pasien"]."'>
                                 <td valign='top'>Tgl.SEP : ".$baris["tglsep"]."<br>No.SEP : ".$baris["no_sep"]."<br>No.Kartu : ".$baris["no_kartu"]."</td>
@@ -272,4 +273,3 @@
 	</form>
     </div>
 </div>
-
