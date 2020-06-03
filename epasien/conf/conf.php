@@ -19,19 +19,69 @@
     }
      
     function cleankar($dirty){
+         $konektor=bukakoneksi();
 	if (get_magic_quotes_gpc()) {
-            $clean = mysqli_real_escape_string(stripslashes($dirty));	 
+            $clean = mysqli_real_escape_string($konektor,stripslashes($dirty));	 
 	}else{
-            $clean = mysqli_real_escape_string($dirty);	
+            $clean = mysqli_real_escape_string($konektor,$dirty);	
 	} 
-	return preg_replace('/[^a-zA-Z0-9\s_ ]/', '',$clean);
+         mysqli_close($konektor);
+	return preg_replace('/[^a-zA-Z0-9\s_,@. ]/', '',$clean);
+    }
+    
+    function antisqlinjection(){
+       if(!get_magic_quotes_gpc()){
+            $_GET = array_map('mysqli_real_escape_string', $_GET); 
+            $_POST = array_map('mysqli_real_escape_string', $_POST); 
+            $_COOKIE = array_map('mysqli_real_escape_string', $_COOKIE);
+        }else{  
+            $_GET = array_map('stripslashes', $_GET); 
+            $_POST = array_map('stripslashes', $_POST); 
+            $_COOKIE = array_map('stripslashes', $_COOKIE);
+            $_GET = array_map('mysqli_real_escape_string', $_GET); 
+            $_POST = array_map('mysqli_real_escape_string', $_POST); 
+            $_COOKIE = array_map('mysqli_real_escape_string', $_COOKIE);
+        }
+        if (strlen($_SERVER['REQUEST_URI']) > 255 || strpos($_SERVER['REQUEST_URI'], "concat") || 
+                strpos($_SERVER['REQUEST_URI'], "union") || strpos($_SERVER['REQUEST_URI'], "base64") || 
+                strpos($_SERVER['REQUEST_URI'], "'")||strpos($_SERVER['REQUEST_URI'], "/")||
+                strpos($_SERVER['REQUEST_URI'], "*")||strpos($_SERVER['REQUEST_URI'], ";")||
+                strpos($_SERVER['REQUEST_URI'], "/*")||strpos($_SERVER['REQUEST_URI'], "\\")||
+                strpos($_SERVER['REQUEST_URI'], "}")||strpos($_SERVER['REQUEST_URI'], "$")||
+                strpos($_SERVER['REQUEST_URI'], "{")||strpos($_SERVER['REQUEST_URI'], "@")||
+                strpos($_SERVER['REQUEST_URI'], "[")||strpos($_SERVER['REQUEST_URI'], "]")||
+                strpos($_SERVER['REQUEST_URI'], "(")||strpos($_SERVER['REQUEST_URI'], ")")||
+                strpos($_SERVER['REQUEST_URI'], "|")||strpos($_SERVER['REQUEST_URI'], ",")||
+                strpos($_SERVER['REQUEST_URI'], "<")||strpos($_SERVER['REQUEST_URI'], ">")||
+                strpos($_SERVER['REQUEST_URI'], "`")||strpos($_SERVER['REQUEST_URI'], ":")||
+                strpos($_SERVER['REQUEST_URI'], "+")||strpos($_SERVER['REQUEST_URI'], "-")||
+                strpos($_SERVER['REQUEST_URI'], "^")||strpos($_SERVER['REQUEST_URI'], "#")||
+                strpos($_SERVER['REQUEST_URI'], "!")||strpos($_SERVER['REQUEST_URI'], "-")||
+                strpos($_SERVER['REQUEST_URI'], "='")||strpos($_SERVER['REQUEST_URI'], "=/")) {
+            echo "<b>Harus disetujui : <br/>
+            Dilarang keras melakukan hacking/membajak Software/Web ini dengan cara apapun.<br/>
+            Bagi yang sengaja melakukan hacking/membajak softaware ini,<br/>
+            kami sumpahi sial 1000 turunan,miskin sampai 500 turunan.<br/>
+            Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama<br/>
+            nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh<br/>
+            sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami <br/>
+            karena telah berdoa buruk, semua ini kami lakukan karena kami ti<br/>
+            dak pernah rela karya kami dihack/dibajak..</b> ";
+            Zet($hal);
+            @header("HTTP/1.1 414 Request-URI Too Long");
+            @header("Status: 414 Request-URI Too Long");
+            @header("Connection: Close");
+            @exit;
+        }
+        
     }
     
     function mysql_safe_query($format) {
         $args = array_slice(func_get_args(),1);
         $args = array_map('mysql_safe_string',$args);
         $query = vsprintf($format,$args);
-        return mysqli_query($query);
+        $konektor=bukakoneksi();
+        return mysqli_query($konektor,$query);
     }
     
     function validUrl($url){
@@ -62,7 +112,7 @@
     function bukaquery($sql){    
         $konektor=bukakoneksi();
         $result=mysqli_query($konektor, $sql)
-        or die (mysqli_error($konektor)."<br/><font color=red><b>hmmmmmmm.....??????????</b>");
+        or die (/*mysqli_error($konektor)*/"<br/><font color=red><b>Terjadi Kesalahan</b></font>".JSRedirect2("index.php?act=Home",4));
         mysqli_close($konektor);
         return $result;
     }
@@ -77,7 +127,14 @@
     function bukainput($sql){
         $konektor=bukakoneksi();
         $result=mysqli_query($konektor,$sql)
-        or die(/*mysqli_error().*/"<br/><font color=red><b>Gagal</b> menjalankan perintah query !");
+        or die(/*mysqli_error().*/"<br/><font color=red><b>Gagal</b>");
+        mysqli_close($konektor);
+        return $result;
+    }
+    
+    function bukainput2($sql){
+        $konektor=bukakoneksi();
+        $result=mysqli_query($konektor,$sql);
         mysqli_close($konektor);
         return $result;
     }
@@ -88,6 +145,18 @@
         or die("<font color=red><b>Gagal</b>, Data masih dipakai di tabel lain !");
         mysqli_close($konektor);
         return $result;
+    }
+    
+    function TO_DAYS($date) {
+	if (is_numeric($date)) {
+            $res = 719528 + (int) ($date / 86400);
+	} else {
+            $TZ = date_default_timezone_get();
+            date_default_timezone_set('UTC');
+            $res = 719528 + (int) (strtotime($date) / 86400);
+            date_default_timezone_set($TZ);
+	}
+	return $res;
     }
 
     function Tambah($tabelname,$attrib,$pesan) {
@@ -104,6 +173,11 @@
      
     function Tambah3($tabelname,$attrib) {
         $command = bukainput("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
+        return $command;
+    }
+    
+    function Tambah4($tabelname,$attrib) {
+        $command = bukainput2("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
     }
 
@@ -162,6 +236,15 @@
 
     function JSRedirect($url){
         echo"<html><head><title></title><meta http-equiv='refresh' content='1;URL=$url'></head><body></body></html>";
+    }
+    
+    function JSRedirect2($url,$time){
+        echo"<html><head><title></title><meta http-equiv='refresh' content='$time;URL=$url'></head><body></body></html>";
+    }
+
+    // redirect to another page
+    function redirect($location) {
+        return header("Location: {$location}");
     }
 
     function Zet($url){
@@ -232,6 +315,12 @@
         list($result) =mysqli_fetch_array($hasil);
         return $result;
     }
+    
+    function getOne2($sql) {
+        $hasil = bukaquery2($sql);
+        list($result) = mysqli_fetch_array($hasil);
+        return $result;
+    }
 
     function cekKosong($sql) {
         $jum = mysqli_num_rows($sql);
@@ -266,7 +355,6 @@
 
 
     function loadTgl2(){
-        //echo "<option>-&nbsp</option>";
         for($tgl=1; $tgl<=31; $tgl++){
             $tgl_leng=strlen($tgl);
             if ($tgl_leng==1)
@@ -303,7 +391,6 @@
     }
 
     function loadBln2(){
-        //echo "<option>-&nbsp</option>";
         for($bln=1; $bln<=12; $bln++){
             $bln_leng=strlen($bln);
             if ($bln_leng==1)
@@ -355,7 +442,6 @@
     }
     function loadThn3(){
         $thnini=date('Y');
-        //echo "<option>-&nbsp</option>";
         for($thn=$thnini+30; $thn>=1960; $thn--){
             $thn_leng=strlen($thn);
             if ($thn_leng==1)
@@ -368,8 +454,7 @@
 
     function loadThn4(){
         $thnini=date('Y');
-        //echo "<option>-&nbsp</option>";
-        for($thn=$thnini; $thn>=1960; $thn--){
+        for($thn=$thnini+4; $thn>=$thnini; $thn--){
             $thn_leng=strlen($thn);
             if ($thn_leng==1)
             $i="0".$thn;
@@ -394,12 +479,12 @@
     function loadMenit(){
         //echo "<option selected>-----&nbsp</option>";
         for($menit=0; $menit<=60; $menit++){
-                $menit_leng=strlen($menit);
-                if ($menit_leng==1)
-                $i="0".$menit;
-                else
-                $i=$menit;                        
-                echo "<option value=$i>$i</option>";
+            $menit_leng=strlen($menit);
+            if ($menit_leng==1)
+            $i="0".$menit;
+            else
+            $i=$menit;                        
+            echo "<option value=$i>$i</option>";
         }
     }
 

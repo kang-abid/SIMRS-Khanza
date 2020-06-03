@@ -539,6 +539,7 @@ import keuangan.DlgJnsPerawatanRanap;
 import keuangan.DlgPerkiraanBiayaRanap;
 import keuangan.KeuanganBayarPesanToko;
 import keuangan.KeuanganPenagihanPiutangPasien;
+import keuangan.KeuanganSetTarifOnline;
 import laporan.DlgDaftarPasienRanap;
 import laporan.DlgDaftarPasienRanapTNI;
 import rekammedis.RMDataResumePasien;
@@ -552,6 +553,7 @@ import laporan.LaporanKedatanganPasienPerJam;
 import laporan.LaporanRegistrasiPoliPerTanggal;
 import laporan.LaporanRekapKunjunganRuangPerTahun;
 import laporan.LaporanRekapSkriningPernapasanRalanPerTahun;
+import permintaan.DlgBookingPeriksa;
 import perpustakaan.PerpustakaanAnggota;
 import perpustakaan.PerpustakaanBayarDenda;
 import perpustakaan.PerpustakaanCariEbook;
@@ -617,7 +619,11 @@ import toko.TokoPenjualan;
 import toko.TokoPiutang;
 import toko.TokoPiutangHarian;
 import toko.TokoReturBeli;
+import toko.TokoReturJual;
+import toko.TokoReturPiutang;
 import toko.TokoRiwayatBarang;
+import toko.TokoSirkulasi;
+import toko.TokoSirkulasi2;
 import toko.TokoSuplier;
 import toko.TokoSuratPemesanan;
 import tranfusidarah.UTDCariPenyerahanDarah;
@@ -1338,8 +1344,8 @@ public class frmUtama extends javax.swing.JFrame {
 
         internalFrame2.setBorder(null);
         internalFrame2.setName("internalFrame2"); // NOI18N
-        internalFrame2.setWarnaAtas(new java.awt.Color(245, 0, 117));
-        internalFrame2.setWarnaBawah(new java.awt.Color(225, 0, 97));
+        internalFrame2.setWarnaAtas(new java.awt.Color(245, 0, 120));
+        internalFrame2.setWarnaBawah(new java.awt.Color(228, 0, 103));
         internalFrame2.setLayout(null);
 
         internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(100, 125, 90), 1, true), ":: Silahkan Anda Login ::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 11), new java.awt.Color(50, 50, 50))); // NOI18N
@@ -1534,7 +1540,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11/05/2020" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29/05/2020" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -5367,7 +5373,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
-        btnJadwalOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Alarm_132148.png"))); // NOI18N
+        btnJadwalOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/JadwalOperasi.png"))); // NOI18N
         btnJadwalOperasi.setText("Jadwal Operasi");
         btnJadwalOperasi.setIconTextGap(0);
         btnJadwalOperasi.setName("btnJadwalOperasi"); // NOI18N
@@ -6593,8 +6599,8 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setPreferredSize(new java.awt.Dimension(40, 42));
         internalFrame1.setVerifyInputWhenFocusTarget(false);
-        internalFrame1.setWarnaAtas(new java.awt.Color(255, 245, 245));
-        internalFrame1.setWarnaBawah(new java.awt.Color(255, 205, 205));
+        internalFrame1.setWarnaAtas(new java.awt.Color(255, 242, 247));
+        internalFrame1.setWarnaBawah(new java.awt.Color(255, 202, 207));
         internalFrame1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 2));
 
         BtnMenu.setBackground(new java.awt.Color(255, 255, 255));
@@ -6874,8 +6880,8 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame4.setBorder(null);
         internalFrame4.setName("internalFrame4"); // NOI18N
         internalFrame4.setPreferredSize(new java.awt.Dimension(330, 25));
-        internalFrame4.setWarnaAtas(new java.awt.Color(255, 205, 210));
-        internalFrame4.setWarnaBawah(new java.awt.Color(255, 245, 250));
+        internalFrame4.setWarnaAtas(new java.awt.Color(255, 202, 212));
+        internalFrame4.setWarnaBawah(new java.awt.Color(255, 242, 252));
         internalFrame4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 1));
 
         lblStts.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -10457,8 +10463,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 win.setLocationRelativeTo(PanelUtama);
                 win.toFront();
             }
-        }        
-        
+        }
     }//GEN-LAST:event_PanelWallMouseMoved
 
     private void btnCekBPJSFaskesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCekBPJSFaskesActionPerformed
@@ -15818,6 +15823,78 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnSetTarifOnlineActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        KeuanganSetTarifOnline aplikasi=new KeuanganSetTarifOnline(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnBookingPeriksaActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgBookingPeriksa aplikasi=new DlgBookingPeriksa();
+        aplikasi.isCek();
+        aplikasi.setSize(800, PanelUtama.getHeight()-40);
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnSirkulasiBarangTokoActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        TokoSirkulasi sirkulasi=new TokoSirkulasi(this,false);
+        sirkulasi.isCek();
+        sirkulasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        sirkulasi.setLocationRelativeTo(PanelUtama);
+        sirkulasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnReturJualTokoActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        TokoReturJual form=new TokoReturJual(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnReturPiutangTokoActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        TokoReturPiutang form=new TokoReturPiutang(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnSirkulasiBarangToko2ActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        TokoSirkulasi2 sirkulasi=new TokoSirkulasi2(this,false);
+        sirkulasi.isCek();
+        sirkulasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        sirkulasi.setLocationRelativeTo(PanelUtama);
+        sirkulasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -16416,7 +16493,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnBayarPesanToko,btnMemberToko,btnPenjualanToko,btnRegistrasiPoliPerTanggal,btnPiutangToko,btnReturKeSuplierToko,btnReturBarangNonMedis,
             btnRiwayatBarangNonMedis,btnPasienCorona,btnPendapatanHarianToko,btnDiagnosaPasienCorona,btnPerawatanPasienCorona,btnPenilaianAwalKeperawatanGigi,
             btnMasterMasalahKeperawatanGigi,btnBayarPiutangToko,btnPiutangHarianToko,btnPenjualanHarianToko,btnDeteksiDiniCorona,btnPenilaianAwalKeperawatanKebidanan,
-            btnPengumumanEPasien,btnSuratHamil;
+            btnPengumumanEPasien,btnSuratHamil,btnSetTarifOnline,btnBookingPeriksa,btnSirkulasiBarangToko,btnReturJualToko,btnReturPiutangToko,
+            btnSirkulasiBarangToko2;
     
     public void isWall(){
         try{            
@@ -16545,6 +16623,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
 
+            if(akses.getbooking_periksa()==true){
+                Panelmenu.add(btnBookingPeriksa);
+                jmlmenu++;
+            }
+            
             if(akses.getbooking_registrasi()==true){
                 Panelmenu.add(btnBookingRegistrasi);
                 jmlmenu++;
@@ -17951,6 +18034,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
             if(akses.gettarif_utd()==true){
                 Panelmenu.add(btnTarifUtd);
+                jmlmenu++;
+            }
+            
+            if(akses.getset_tarif_online()==true){
+                Panelmenu.add(btnSetTarifOnline);
                 jmlmenu++;
             }
 
@@ -19483,6 +19571,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
             
+            if(akses.gettoko_retur_jual()==true){
+                Panelmenu.add(btnReturJualToko); 
+                jmlmenu++;
+            }
+            
+            if(akses.gettoko_retur_piutang()==true){
+                Panelmenu.add(btnReturPiutangToko); 
+                jmlmenu++;
+            }
+            
             if(akses.gettoko_hutang()==true){
                 Panelmenu.add(btnHutangToko);
                 jmlmenu++;
@@ -19510,6 +19608,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.gettoko_bayar_piutang()==true){
                 Panelmenu.add(btnBayarPiutangToko); 
+                jmlmenu++;
+            }
+            
+            if(akses.gettoko_sirkulasi()==true){
+                Panelmenu.add(btnSirkulasiBarangToko); 
+                jmlmenu++;
+            }
+            
+            if(akses.gettoko_sirkulasi2()==true){
+                Panelmenu.add(btnSirkulasiBarangToko2); 
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==17){   
@@ -19660,6 +19768,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.getregistrasi()==true){
             Panelmenu.add(btnRegistrasi);
+            jmlmenu++;
+        }
+        
+        if(akses.getbooking_periksa()==true){
+            Panelmenu.add(btnBookingPeriksa);
             jmlmenu++;
         }
 
@@ -21060,6 +21173,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.gettarif_utd()==true){
             Panelmenu.add(btnTarifUtd);
+            jmlmenu++;
+        }
+        
+        if(akses.getset_tarif_online()==true){
+            Panelmenu.add(btnSetTarifOnline);
             jmlmenu++;
         }
 
@@ -22580,6 +22698,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
         
+        if(akses.gettoko_retur_jual()==true){
+            Panelmenu.add(btnReturJualToko); 
+            jmlmenu++;
+        }
+        
+        if(akses.gettoko_retur_piutang()==true){
+            Panelmenu.add(btnReturPiutangToko); 
+            jmlmenu++;
+        }
+        
         if(akses.gettoko_hutang()==true){
             Panelmenu.add(btnHutangToko);
             jmlmenu++;
@@ -22607,6 +22735,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
 
         if(akses.gettoko_bayar_piutang()==true){
             Panelmenu.add(btnBayarPiutangToko); 
+            jmlmenu++;
+        }
+        
+        if(akses.gettoko_sirkulasi()==true){
+            Panelmenu.add(btnSirkulasiBarangToko); 
+            jmlmenu++;
+        }
+
+        if(akses.gettoko_sirkulasi2()==true){
+            Panelmenu.add(btnSirkulasiBarangToko2); 
             jmlmenu++;
         }
 
@@ -22760,6 +22898,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getregistrasi()==true){
             if(btnRegistrasi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnRegistrasi);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getbooking_periksa()==true){
+            if(btnBookingPeriksa.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnBookingPeriksa);
                 jmlmenu++;
             }                
         }
@@ -24723,6 +24868,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.gettarif_utd()==true){
             if(btnTarifUtd.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTarifUtd);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getset_tarif_online()==true){
+            if(btnSetTarifOnline.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSetTarifOnline);
                 jmlmenu++;
             }                
         }
@@ -26851,6 +27003,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.gettoko_retur_jual()==true){
+            if(btnReturJualToko.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnReturJualToko);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.gettoko_retur_piutang()==true){
+            if(btnReturPiutangToko.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnReturPiutangToko);
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.gettoko_hutang()==true){
             if(btnHutangToko.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnHutangToko);
@@ -26889,6 +27055,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.gettoko_bayar_piutang()==true){
             if(btnBayarPiutangToko.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBayarPiutangToko);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.gettoko_sirkulasi()==true){
+            if(btnSirkulasiBarangToko.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSirkulasiBarangToko);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.gettoko_sirkulasi2()==true){
+            if(btnSirkulasiBarangToko2.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSirkulasiBarangToko2);
                 jmlmenu++;
             }                
         }
@@ -29033,7 +29213,78 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 btnSuratHamilActionPerformed(evt);
             }
         });
-                
+        
+        btnSetTarifOnline = new widget.ButtonBig();
+        btnSetTarifOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_Non-Service_Specific_copy_Client_259291.png"))); 
+        btnSetTarifOnline.setText("Set Tarif Online");
+        btnSetTarifOnline.setIconTextGap(0);
+        btnSetTarifOnline.setName("btnSetTarifOnline"); 
+        btnSetTarifOnline.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetTarifOnline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetTarifOnlineActionPerformed(evt);
+            }
+        });
+        
+        btnBookingPeriksa = new widget.ButtonBig();
+        btnBookingPeriksa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_addressbook_32380.png"))); 
+        btnBookingPeriksa.setText("Booking Periksa");
+        btnBookingPeriksa.setIconTextGap(0);
+        btnBookingPeriksa.setName("btnBookingPeriksa"); 
+        btnBookingPeriksa.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBookingPeriksa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookingPeriksaActionPerformed(evt);
+            }
+        });
+        
+        btnSirkulasiBarangToko = new widget.ButtonBig();
+        btnSirkulasiBarangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); 
+        btnSirkulasiBarangToko.setText("Sirkulasi Barang Toko");
+        btnSirkulasiBarangToko.setIconTextGap(0);
+        btnSirkulasiBarangToko.setName("btnSirkulasiBarangToko"); 
+        btnSirkulasiBarangToko.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSirkulasiBarangToko.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSirkulasiBarangTokoActionPerformed(evt);
+            }
+        });    
+        
+        btnReturJualToko = new widget.ButtonBig();
+        btnReturJualToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360486142_shopping_cart.png"))); 
+        btnReturJualToko.setText("Retur Jual Toko");
+        btnReturJualToko.setIconTextGap(0);
+        btnReturJualToko.setName("btnReturJualToko"); 
+        btnReturJualToko.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnReturJualToko.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturJualTokoActionPerformed(evt);
+            }
+        }); 
+        
+        btnReturPiutangToko = new widget.ButtonBig();
+        btnReturPiutangToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/custom-reports.png"))); 
+        btnReturPiutangToko.setText("Retur Piutang Toko");
+        btnReturPiutangToko.setIconTextGap(0);
+        btnReturPiutangToko.setName("btnReturPiutangToko"); 
+        btnReturPiutangToko.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnReturPiutangToko.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturPiutangTokoActionPerformed(evt);
+            }
+        }); 
+        
+        btnSirkulasiBarangToko2 = new widget.ButtonBig();
+        btnSirkulasiBarangToko2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); 
+        btnSirkulasiBarangToko2.setText("Sirkulasi Barang Toko 2");
+        btnSirkulasiBarangToko2.setIconTextGap(0);
+        btnSirkulasiBarangToko2.setName("btnSirkulasiBarangToko2"); 
+        btnSirkulasiBarangToko2.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSirkulasiBarangToko2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSirkulasiBarangToko2ActionPerformed(evt);
+            }
+        }); 
     }
 
     
