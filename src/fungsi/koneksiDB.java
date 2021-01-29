@@ -791,4 +791,42 @@ public class koneksiDB {
         }
         return var;
     }
+    
+    public static String STOKKOSONGRESEP(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("STOKKOSONGRESEP");
+        }catch(Exception e){
+            var="no"; 
+        }
+        return var;
+    }
+    
+    public static String HPPFARMASI(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            if(prop.getProperty("HPPFARMASI").equals("h_beli")){
+                var="h_beli";
+            }else{
+                var="dasar";
+            }
+        }catch(Exception e){
+            var="dasar"; 
+        }
+        return var;
+    }
+    
+    public static String HPPTOKO(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            if(prop.getProperty("HPPTOKO").equals("h_beli")){
+                var="h_beli";
+            }else{
+                var="dasar";
+            }
+        }catch(Exception e){
+            var="dasar"; 
+        }
+        return var;
+    }
 }
