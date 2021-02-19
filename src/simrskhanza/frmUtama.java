@@ -524,8 +524,11 @@ import inventory.DlgSirkulasiBarang4;
 import inventory.DlgSirkulasiBarang5;
 import inventory.DlgSisaStok;
 import inventory.HibahObatBHP;
-import inventory.InventoryRingkasanHibahObatBHP;
+import inventory.InventoryRingkasanBeriObat;
+import inventory.InventoryRingkasanHibahBarangMedis;
 import inventory.InventoryRingkasanPenjualanBarangMedis;
+import inventory.InventoryRingkasanPiutangBarangMedis;
+import inventory.InventoryRingkasanStokKeluarBarangMedis;
 import inventory.InventoryVerifikasiPenerimaan;
 import ipsrs.DlgPengajuanBarangNonMedis;
 import ipsrs.DlgSirkulasiNonMedis2;
@@ -16687,7 +16690,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void btnRingkasanHibahMedisActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        InventoryRingkasanHibahObatBHP aplikasi=new InventoryRingkasanHibahObatBHP(this,false);
+        InventoryRingkasanHibahBarangMedis aplikasi=new InventoryRingkasanHibahBarangMedis(this,false);
         aplikasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -16699,6 +16702,39 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         InventoryRingkasanPenjualanBarangMedis aplikasi=new InventoryRingkasanPenjualanBarangMedis(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnRingkasanBeriObatActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventoryRingkasanBeriObat aplikasi=new InventoryRingkasanBeriObat(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnRingkasanPiutangObatActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventoryRingkasanPiutangBarangMedis aplikasi=new InventoryRingkasanPiutangBarangMedis(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnRingkasanStokKeluarObatActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventoryRingkasanStokKeluarBarangMedis aplikasi=new InventoryRingkasanStokKeluarBarangMedis(this,false);
         aplikasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -17318,7 +17354,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnKlasifikasiPasienRanap,btnBulananKlasifikasiPasienRanap,btnHarianKlasifikasiPasienRanap,btnKlasifikasiPasienPerRuang,btnSOAPPerawatan,
             btnKlaimRawatJalan,btnSkriningGiziLanjut,btnLamaPenyiapanRM,btnDosisRadiologi,btnDemografiUmurKunjungan,btnJamDietPasien,btnRVPPiutangBPJS,
             btnVerifikasiPenerimaanFarmasi,btnVerifikasiPenerimaanLogistik,btnPermintaanLabPA,btnLamaPelayananLabPA,btnRingkasanPengajuanMedis,
-            btnRingkasanPemesananMedis,btnRingkasanPembelianMedis,btnRingkasanPenerimaanMedis,btnRingkasanHibahMedis,btnRingkasanPenjualanMedis;
+            btnRingkasanPemesananMedis,btnRingkasanPembelianMedis,btnRingkasanPenerimaanMedis,btnRingkasanHibahMedis,btnRingkasanPenjualanMedis,
+            btnRingkasanBeriObat,btnRingkasanPiutangObat,btnRingkasanStokKeluarObat;
     
     public void isWall(){
         try{            
@@ -17904,6 +17941,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }
             
+            if(akses.getringkasan_beri_obat()==true){
+                Panelmenu.add(btnRingkasanBeriObat);
+                jmlmenu++;
+            }
+            
             if(akses.getresep_dokter()==true){
                 Panelmenu.add(btnDaftarPermintaanResep);
                 jmlmenu++;
@@ -17914,8 +17956,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                  jmlmenu++;
             }
             
+            if(akses.getringkasan_piutang_obat()==true){
+                 Panelmenu.add(btnRingkasanPiutangObat);  
+                 jmlmenu++;
+            }
+            
             if(akses.getpengeluaran_stok_apotek()==true){
                  Panelmenu.add(btnStokKeluarMedis);  
+                 jmlmenu++;
+            }
+            
+            if(akses.getringkasan_stok_keluar_obat()==true){
+                 Panelmenu.add(btnRingkasanStokKeluarObat);  
                  jmlmenu++;
             }
 
@@ -21348,6 +21400,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnRingkasanPenjualanMedis);
             jmlmenu++;
         }
+        
+        if(akses.getringkasan_beri_obat()==true){
+            Panelmenu.add(btnRingkasanBeriObat);
+            jmlmenu++;
+        }
 
         if(akses.getresep_dokter()==true){
             Panelmenu.add(btnDaftarPermintaanResep);
@@ -21359,8 +21416,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
              jmlmenu++;
         }
         
+        if(akses.getringkasan_piutang_obat()==true){
+             Panelmenu.add(btnRingkasanPiutangObat);  
+             jmlmenu++;
+        }
+        
         if(akses.getpengeluaran_stok_apotek()==true){
              Panelmenu.add(btnStokKeluarMedis);  
+             jmlmenu++;
+        }
+
+        if(akses.getringkasan_stok_keluar_obat()==true){
+             Panelmenu.add(btnRingkasanStokKeluarObat);  
              jmlmenu++;
         }
 
@@ -24964,6 +25031,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getringkasan_beri_obat()==true){
+            if(btnRingkasanBeriObat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRingkasanBeriObat);
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getresep_dokter()==true){
             if(btnDaftarPermintaanResep.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnDaftarPermintaanResep);
@@ -24978,6 +25052,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
         
+        if(akses.getringkasan_piutang_obat()==true){
+            if(btnRingkasanPiutangObat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRingkasanPiutangObat);  
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getpengeluaran_stok_apotek()==true){
             if(btnStokKeluarMedis.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnStokKeluarMedis);  
@@ -24985,6 +25066,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }                
         }
 
+        if(akses.getringkasan_stok_keluar_obat()==true){
+            if(btnRingkasanStokKeluarObat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRingkasanStokKeluarObat); 
+                jmlmenu++;
+            }                
+        }
+        
         if(akses.getretur_ke_suplier()==true){
             if(btnReturBeli.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnReturBeli); 
@@ -30908,6 +30996,30 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRingkasanPenjualanMedis.setName("btnRingkasanPenjualanMedis");
         btnRingkasanPenjualanMedis.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRingkasanPenjualanMedis.addActionListener(this::btnRingkasanPenjualanMedisActionPerformed);
+        
+        btnRingkasanBeriObat = new widget.ButtonBig();
+        btnRingkasanBeriObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png"))); // NOI18N
+        btnRingkasanBeriObat.setText("Ringkasan Beri Obat & BHP");
+        btnRingkasanBeriObat.setIconTextGap(0);
+        btnRingkasanBeriObat.setName("btnRingkasanBeriObat");
+        btnRingkasanBeriObat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanBeriObat.addActionListener(this::btnRingkasanBeriObatActionPerformed);
+        
+        btnRingkasanPiutangObat = new widget.ButtonBig();
+        btnRingkasanPiutangObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png"))); // NOI18N
+        btnRingkasanPiutangObat.setText("Ringkasan Piutang Obat & BHP");
+        btnRingkasanPiutangObat.setIconTextGap(0);
+        btnRingkasanPiutangObat.setName("btnRingkasanPiutangObat");
+        btnRingkasanPiutangObat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanPiutangObat.addActionListener(this::btnRingkasanPiutangObatActionPerformed);
+        
+        btnRingkasanStokKeluarObat = new widget.ButtonBig();
+        btnRingkasanStokKeluarObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_binary-tree_49580.png"))); // NOI18N
+        btnRingkasanStokKeluarObat.setText("Ringkasan Stok Keluar Obat & BHP");
+        btnRingkasanStokKeluarObat.setIconTextGap(0);
+        btnRingkasanStokKeluarObat.setName("btnRingkasanStokKeluarObat");
+        btnRingkasanStokKeluarObat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRingkasanStokKeluarObat.addActionListener(this::btnRingkasanStokKeluarObatActionPerformed);
     }
 
     
