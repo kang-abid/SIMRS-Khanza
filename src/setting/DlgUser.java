@@ -112,7 +112,7 @@ public class DlgUser extends javax.swing.JDialog {
                 "[L]Insiden Keselamatan Pasien","[N]Kejadian IKP Per Tahun","[N]Kejadian IKP Per Bulan","[N]Kejadian IKP Per Tanggal","[D]Riwayat Batch","[N]Kejadian IKP Per Jenis",
                 "[N]Kejadian IKP Per Dampak","[H]Piutang Per Akun Piutang","[N]Registrasi Per Agama","[N]Registrasi Per Umur","[L]Suku/Bangsa Pasien","[L]Bahasa Pasien","[L]Golongan TNI",
                 "[L]Satuan TNI","[L]Jabatan TNI","[L]Pangkat TNI","[L]Golongan POLRI","[L]Satuan POLRI","[L]Jabatan POLRI","[L]Pangkat POLRI","[L]Cacat Fisik","[N]Registrasi Per Suku/Bangsa",
-                "[N]Registrasi Per Bahasa","[A]Jadwal Operasi","[K]Mapping Poli VClaim","[N]Registrasi Per Cacat Fisik","[F]Barang CSSD","[K]SKDP BPJS","[A]Booking Registrasi",
+                "[N]Registrasi Per Bahasa","[A]Jadwal Operasi","[K]Mapping Poli VClaim","[N]Registrasi Per Cacat Fisik","[F]Barang CSSD","[O]Surat Kontrol","[A]Booking Registrasi",
                 "[K]Referensi Propinsi VClaim","[K]Referensi Kabupaten VClaim","[K]Referensi Kecamatan VClaim","[K]Referensi Dokter DPJP VClaim","[K]Riwayat Rujukan RS di VClaim",
                 "[K]Tanggal Rujukan di VClaim","[A]Permintaan Lab","[A]Permintaan Radiologi","[O]Indeks Surat","[O]Map Surat","[O]Almari Surat","[O]Rak Surat","[O]Ruang Surat",
                 "[O]Klasifikasi Surat","[O]Status Surat","[O]Sifat Surat","[O]Stts Balas Surat","[O]Surat Masuk","[K]Referensi Dokter PCare","[K]Referensi Poli PCare",
@@ -178,7 +178,9 @@ public class DlgUser extends javax.swing.JDialog {
                 "[D]Ringkasan Hibah Obat & BHP","[D]Ringkasan Penjualan Obat & BHP","[D]Ringkasan Beri Obat & BHP","[D]Ringkasan Piutang Obat & BHP",
                 "[D]Ringkasan Stok Keluar Obat & BHP","[D]Ringkasan Retur Suplier Obat & BHP","[D]Ringkasan Retur Pembeli Obat & BHP","[L]Penilaian Awal Ranap Kebidanan",
                 "[E]Ringkasan Pengajuan Non Medis","[E]Ringkasan Pemesanan Non Medis","[E]Ringkasan Pengadaan Non Medis","[E]Ringkasan Penerimaan Non Medis",
-                "[E]Ringkasan Stok Keluar Non Medis","[E]Ringkasan Retur Suplier Non Medis","[J]Penerimaan/Omset/Kas Masuk","[J]Validasi Penagihan Piutang"
+                "[E]Ringkasan Stok Keluar Non Medis","[E]Ringkasan Retur Suplier Non Medis","[J]Penerimaan/Omset/Kas Masuk","[J]Validasi Penagihan Piutang",
+                "[A]Permintaan Rawat Inap","[K]Referensi Diagnosa PRB VClaim","[K]Referensi Obat PRB VClaim","[K]Surat Kontrol/SPRI VClaim","[D]Penggunaan BHP OK/VK",
+                "[O]Surat Keterangan Rawat Inap","[O]Surat Keterangan Sehat"
         };
         
         tabMode=new DefaultTableModel(null,row){
@@ -369,6 +371,7 @@ public class DlgUser extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
              };
              @Override
@@ -382,7 +385,7 @@ public class DlgUser extends javax.swing.JDialog {
         tbUser.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbUser.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 702;i++) {
+        for (i = 0; i < 709;i++) {
             TableColumn column = tbUser.getColumnModel().getColumn(i);
             switch (i) {
                 case 0:
@@ -1942,6 +1945,27 @@ public class DlgUser extends javax.swing.JDialog {
                 case 701:
                     column.setPreferredWidth(152);
                     break;
+                case 702:
+                    column.setPreferredWidth(137);
+                    break;
+                case 703:
+                    column.setPreferredWidth(176);
+                    break;
+                case 704:
+                    column.setPreferredWidth(155);
+                    break;
+                case 705:
+                    column.setPreferredWidth(150);
+                    break;
+                case 706:
+                    column.setPreferredWidth(138);
+                    break;
+                case 707:
+                    column.setPreferredWidth(167);
+                    break;
+                case 708:
+                    column.setPreferredWidth(139);
+                    break;
                 default:
                     column.setPreferredWidth(130);
                     break;
@@ -2439,7 +2463,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
-                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
+                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
                 tampil();
                 emptTeks();
             }            
@@ -3183,7 +3207,14 @@ public class DlgUser extends javax.swing.JDialog {
                     "ringkasan_stokkeluar_nonmedis='"+tbUser.getValueAt(i,698).toString()+"',"+
                     "ringkasan_returbeli_nonmedis='"+tbUser.getValueAt(i,699).toString()+"',"+
                     "omset_penerimaan='"+tbUser.getValueAt(i,700).toString()+"',"+
-                    "validasi_penagihan_piutang='"+tbUser.getValueAt(i,701).toString()+"'");
+                    "validasi_penagihan_piutang='"+tbUser.getValueAt(i,701).toString()+"',"+
+                    "permintaan_ranap='"+tbUser.getValueAt(i,702).toString()+"',"+
+                    "bpjs_diagnosa_prb='"+tbUser.getValueAt(i,703).toString()+"',"+
+                    "bpjs_obat_prb='"+tbUser.getValueAt(i,704).toString()+"',"+
+                    "bpjs_surat_kontrol='"+tbUser.getValueAt(i,705).toString()+"',"+
+                    "penggunaan_bhp_ok='"+tbUser.getValueAt(i,706).toString()+"',"+
+                    "surat_keterangan_rawat_inap='"+tbUser.getValueAt(i,707).toString()+"',"+
+                    "surat_keterangan_sehat='"+tbUser.getValueAt(i,708).toString()+"'");
             }            
             tampil();
             emptTeks();
@@ -3966,7 +3997,14 @@ public class DlgUser extends javax.swing.JDialog {
                                     "ringkasan_stokkeluar_nonmedis='"+tbUser.getValueAt(barisdicopy,698).toString()+"',"+
                                     "ringkasan_returbeli_nonmedis='"+tbUser.getValueAt(barisdicopy,699).toString()+"',"+
                                     "omset_penerimaan='"+tbUser.getValueAt(barisdicopy,700).toString()+"',"+
-                                    "validasi_penagihan_piutang='"+tbUser.getValueAt(barisdicopy,701).toString()+"'");
+                                    "validasi_penagihan_piutang='"+tbUser.getValueAt(barisdicopy,701).toString()+"',"+
+                                    "permintaan_ranap='"+tbUser.getValueAt(barisdicopy,702).toString()+"',"+
+                                    "bpjs_diagnosa_prb='"+tbUser.getValueAt(barisdicopy,703).toString()+"',"+
+                                    "bpjs_obat_prb='"+tbUser.getValueAt(barisdicopy,704).toString()+"',"+
+                                    "bpjs_surat_kontrol='"+tbUser.getValueAt(barisdicopy,705).toString()+"',"+
+                                    "penggunaan_bhp_ok='"+tbUser.getValueAt(barisdicopy,706).toString()+"',"+
+                                    "surat_keterangan_rawat_inap='"+tbUser.getValueAt(barisdicopy,707).toString()+"',"+
+                                    "surat_keterangan_sehat='"+tbUser.getValueAt(barisdicopy,708).toString()+"'");
                             }    
                             userdicopy="";
                             copyhakakses="";
@@ -4296,7 +4334,9 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         "ringkasan_pemesanan_obat,ringkasan_pengadaan_obat,ringkasan_penerimaan_obat,ringkasan_hibah_obat,ringkasan_penjualan_obat,"+
                         "ringkasan_beri_obat,ringkasan_piutang_obat,ringkasan_stok_keluar_obat,ringkasan_retur_suplier_obat,ringkasan_retur_pembeli_obat,"+
                         "penilaian_awal_keperawatan_ranapkebidanan,ringkasan_pengajuan_nonmedis,ringkasan_pemesanan_nonmedis,ringkasan_pengadaan_nonmedis,"+
-                        "ringkasan_penerimaan_nonmedis,ringkasan_stokkeluar_nonmedis,ringkasan_returbeli_nonmedis,omset_penerimaan,validasi_penagihan_piutang from user order by AES_DECRYPT(id_user,'nur')");
+                        "ringkasan_penerimaan_nonmedis,ringkasan_stokkeluar_nonmedis,ringkasan_returbeli_nonmedis,omset_penerimaan,validasi_penagihan_piutang,"+
+                        "permintaan_ranap,bpjs_diagnosa_prb,bpjs_obat_prb,bpjs_surat_kontrol,penggunaan_bhp_ok,surat_keterangan_rawat_inap,"+
+                        "surat_keterangan_sehat from user order by AES_DECRYPT(id_user,'nur')");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -5010,7 +5050,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                rs.getBoolean("ringkasan_stokkeluar_nonmedis"),
                                rs.getBoolean("ringkasan_returbeli_nonmedis"),
                                rs.getBoolean("omset_penerimaan"),
-                               rs.getBoolean("validasi_penagihan_piutang")
+                               rs.getBoolean("validasi_penagihan_piutang"),
+                               rs.getBoolean("permintaan_ranap"),
+                               rs.getBoolean("bpjs_diagnosa_prb"),
+                               rs.getBoolean("bpjs_obat_prb"),
+                               rs.getBoolean("bpjs_surat_kontrol"),
+                               rs.getBoolean("penggunaan_bhp_ok"),
+                               rs.getBoolean("surat_keterangan_rawat_inap"),
+                               rs.getBoolean("surat_keterangan_sehat")
                             });
                         }   
                     } catch (Exception e) {
@@ -5713,7 +5760,14 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                            rs.getBoolean("ringkasan_stokkeluar_nonmedis"),
                            rs.getBoolean("ringkasan_returbeli_nonmedis"),
                            rs.getBoolean("omset_penerimaan"),
-                           rs.getBoolean("validasi_penagihan_piutang")
+                           rs.getBoolean("validasi_penagihan_piutang"),
+                           rs.getBoolean("permintaan_ranap"),
+                           rs.getBoolean("bpjs_diagnosa_prb"),
+                           rs.getBoolean("bpjs_obat_prb"),
+                           rs.getBoolean("bpjs_surat_kontrol"),
+                           rs.getBoolean("penggunaan_bhp_ok"),
+                           rs.getBoolean("surat_keterangan_rawat_inap"),
+                           rs.getBoolean("surat_keterangan_sehat")
                         });
                     }                                             
                  }
